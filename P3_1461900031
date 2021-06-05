@@ -12,7 +12,7 @@ class PencarianController extends Controller
     public function index()
     {
        $pencaruan = Biodata::latest()->paginate(5);
-        return view('biodata.index',compact('pencaria'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('pencarian.index',compact('pencaria'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
     /**
      * Show the form for creating a new resource.
@@ -72,7 +72,7 @@ class PencarianController extends Controller
             'alamat' => 'required',
         ]);
         $pencarian->like($request->all());
-        return redirect()->route('biodata.index')->with('success','pencarian berhasil ditemukan ');
+        return redirect()->route('pencarian.index')->with('success','pencarian berhasil ditemukan ');
     }
     /**
      * Remove the specified resource from storage.
