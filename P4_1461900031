@@ -1,6 +1,92 @@
-title>Export Laporan Excel Pada Laravel</title>
-</head>
-<body>
+namespace App\Http\Controllers;
+use App\Pencarian;
+use Illuminate\Http\Request;
+class PencarianController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+       $pencaruan = Biodata::latest()->paginate(5);
+        return view('pencarian.index',compact('pencaria'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('pencarian.create');
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+        ]);
+        pencarian::create($request->all());
+        return redirect()->route('pencarian.index')->with('success','Data berhasil di input');
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\pencarian  $pencrian
+     * @return \Illuminate\Http\Response
+     */
+    public function show(pencarian $pencarian)
+    {
+        return view('pencarian.show',compact('pencarian'));
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\pencr8an  $pencarian
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(pencarina $pencarian)
+    {
+        return view('pencrian.like',compact('pencarian'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\pencarian  $pencarian
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, penvarian $pencarian)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+        ]);
+        $pencarian->like($request->all());
+        return redirect()->route('pencarian.index')->with('success','pencarian berhasil ditemukan ');
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\pencarian  $pencarin
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(pencarian $pencarian)
+    {
+        $pencarian->delete();
+        return redirect()->route('pencarian.index')->with('success','pencarian tidak berhasil ditemulan');
+
+         title>Export Laporan Excel Pada Laravel</title>
+         </head>
+         <body>
 
 	<div class="container">
 		<center>
