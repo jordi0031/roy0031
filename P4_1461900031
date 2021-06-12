@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 use Auth;
-class ArtikelController extends Controller
+class exportController extends Controller
 {
     private function is_login()
     {
@@ -18,7 +18,7 @@ class ArtikelController extends Controller
  
     public function show()
     {
-        $articles = DB::table('artikel')->orderby('id', 'desc')->get();
+        $articles = DB::table('export')->orderby('id', 'desc')->get();
         return view('show', ['articles'=>$articles]);
     }
  
